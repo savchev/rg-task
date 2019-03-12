@@ -37,7 +37,7 @@ class GuzzleWrapper implements ClientInterface
 
     public function getAll(): iterable
     {
-        $response = $this->guzzle->get($this->url);
+        $response = $this->guzzle->get($this->url . '/list');
         if ($response->getStatusCode() != 200) {
             throw new \RuntimeException(
                 $response->getReasonPhrase(),

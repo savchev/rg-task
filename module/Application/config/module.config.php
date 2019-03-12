@@ -7,10 +7,12 @@
 
 namespace Application;
 
+use Application\Controller\IndexController;
 use Application\Service\Http\Factory\ClientFactory;
 use Application\Service\Http\ClientInterface;
+use Application\Service\Repository\Factory\UserRepositoryFactory;
+use Application\Service\Repository\UserRepository;
 use Zend\Router\Http\Literal;
-use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -21,17 +23,7 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],
-            'application' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route'    => '/application[/:action]',
-                    'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => IndexController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -40,12 +32,13 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            IndexController::class => InvokableFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
             ClientInterface::class => ClientFactory::class,
+            UserRepository::class => UserRepositoryFactory::class,
         ]
     ],
     'view_manager' => [
