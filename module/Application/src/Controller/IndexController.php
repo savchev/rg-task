@@ -28,8 +28,16 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
+        try {
+            $users = $this->repository->getAll();
+            $error = null;
+        } catch (\Exception $e) {
+            $users = [];
+            $error = $e;
+        }
         return [
-            'users' => $this->repository->getAll()
+            'users' => $users,
+            'error' => $error,
         ];
     }
 }

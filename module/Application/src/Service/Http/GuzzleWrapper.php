@@ -39,10 +39,6 @@ class GuzzleWrapper implements ClientInterface
     {
         $response = $this->guzzle->get($this->url . '/list');
         if ($response->getStatusCode() != 200) {
-            throw new \RuntimeException(
-                $response->getReasonPhrase(),
-                $response->getStatusCode()
-            );
         }
         return $this->processResponse($response);
     }

@@ -2,14 +2,30 @@
 
     <div class="col col-6">
 
+        <?php if ($error && $error instanceof \Exception): ?>
+
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><?= $error->getMessage(); ?></h4>
+            <?php if ($error->getPrevious()): ?>
+            <p>There is more information in previous exceptions:</p>
+            <ul>
+            <?php while (($error = $error->getPrevious())): ?>
+                <li><?= $error->getMessage(); ?></li>
+            <?php endwhile; ?>
+            </ul>
+            <?php endif; ?>
+        </div>
+
+        <?php else: ?>
+
         <ul class="list-unstyled">
 
             <?php foreach ($users as $user): ?>
             <li class="media my-4">
                 <?php if ($user->getAvatar()): ?>
-                    <img style="max-width:64px" src="<?= $user->getAvatar(); ?>" class="mr-3" alt="avatar" />
+                    <img style="width:64px" src="<?= $user->getAvatar(); ?>" class="mr-3" alt="avatar" />
                 <?php else: ?>
-                <img style="max-width:64px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnH4Yu8_WWhN8RVxzE-JAmGE2cy6MlB7fqOZBwiJj8DAAndpR4" class="mr-3" alt="avatar" />
+                <img style="width:64px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnH4Yu8_WWhN8RVxzE-JAmGE2cy6MlB7fqOZBwiJj8DAAndpR4" class="mr-3" alt="avatar" />
                 <?php endif; ?>
                 <div class="media-body">
                     <h5><a href="#<?= $user->getUuid(); ?>"><?= $user->getName(); ?></a></h5>
@@ -19,6 +35,8 @@
             </li>
             <?php endforeach; ?>
         </ul>
+
+        <?php endif; ?>
 
     </div>
 
