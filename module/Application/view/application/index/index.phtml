@@ -4,16 +4,20 @@
 
         <ul class="list-unstyled">
 
-            <?php for ($i=0; $i < 15; $i++): ?>
+            <?php foreach ($users as $user): ?>
             <li class="media my-4">
+                <?php if ($user->getAvatar()): ?>
+                    <img style="max-width:64px" src="<?= $user->getAvatar(); ?>" class="mr-3" alt="avatar" />
+                <?php else: ?>
                 <img style="max-width:64px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnH4Yu8_WWhN8RVxzE-JAmGE2cy6MlB7fqOZBwiJj8DAAndpR4" class="mr-3" alt="avatar" />
+                <?php endif; ?>
                 <div class="media-body">
-                    <h5><a href="#">Willis Yost</a></h5>
-                    Precision Instrument Repairer at Harris, Greenfelder and Thompson
-                    <div class="text-muted">Temporibus doloremque molestiae odio qui velit magnam voluptates. Sit sapiente esse consequatur illo. Ut quo modi molestiae aperiam eius.</div>
+                    <h5><a href="#<?= $user->getUuid(); ?>"><?= $user->getName(); ?></a></h5>
+                    <?= $user->getTitle(); ?> at <?= $user->getCompany(); ?>
+                    <div class="text-muted"><?= $user->getBio(); ?></div>
                 </div>
             </li>
-            <?php endfor; ?>
+            <?php endforeach; ?>
         </ul>
 
     </div>

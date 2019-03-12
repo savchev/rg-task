@@ -7,13 +7,29 @@
 
 namespace Application\Controller;
 
+use Application\Service\Repository\UserRepository;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var UserRepository
+     */
+    protected $repository;
+
+    /**
+     * IndexController constructor.
+     * @param UserRepository $repository
+     */
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function indexAction()
     {
-        return new ViewModel();
+        return [
+            'users' => $this->repository->getAll()
+        ];
     }
 }

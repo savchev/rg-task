@@ -50,7 +50,7 @@ class GuzzleWrapper implements ClientInterface
     protected function processResponse(ResponseInterface $response): iterable
     {
         $contentType = $response->getHeader('Content-Type');
-        if ($this->isJson($contentType.'')) {
+        if ($contentType && $this->isJson($contentType[0])) {
             return json_decode($response->getBody().'', true);
         } else {
             return [];
@@ -59,6 +59,6 @@ class GuzzleWrapper implements ClientInterface
 
     protected function isJson(string $contentType): bool
     {
-        return (bool) preg_match('/^application\/[a-z\s]*(json)$/i', $contentType);
+        return (bool) preg_match('/^application\/[\w\s\.\+]*(json)/i', $contentType);
     }
 }

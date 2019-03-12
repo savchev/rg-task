@@ -35,7 +35,7 @@ class ClientFactory implements FactoryInterface
         $mainConfig = $container->get('Config');
         $cfg = $mainConfig['api_config'];
         $guzzle = new Client([
-            'auth' => [$cfg['user'], $cfg['pass']]
+            'auth' => [$cfg['user'], $cfg['password']]
         ]);
         return new GuzzleWrapper($guzzle, $cfg['host']);
     }

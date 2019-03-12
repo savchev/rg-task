@@ -17,22 +17,22 @@ class UserRepository extends AbstractApiRepository
     {
         $user = new User();
         if (array_key_exists('uuid', $row)) {
-            $user->setUuid($row['uuid']);
+            $user->setUuid(strip_tags($row['uuid']));
         }
         if (array_key_exists('name', $row)) {
-            $user->setName($row['name']);
+            $user->setName(strip_tags($row['name']));
         }
-        if (array_key_exists('title', $row)) {
-            $user->setTitle($row['title']);
+        if (array_key_exists('title', $row) && $row['title']) {
+            $user->setTitle(strip_tags($row['title']));
         }
-        if (array_key_exists('company', $row)) {
-            $user->setCompany($row['company']);
+        if (array_key_exists('company', $row) && $row['company']) {
+            $user->setCompany(strip_tags($row['company']));
         }
-        if (array_key_exists('bio', $row)) {
-            $user->setBio($row['bio']);
+        if (array_key_exists('bio', $row) && $row['bio']) {
+            $user->setBio(strip_tags($row['bio']));
         }
-        if (array_key_exists('avatar', $row)) {
-            $user->setAvatar(stripslashes($row['avatar']));
+        if (array_key_exists('avatar', $row) && $row['avatar']) {
+            $user->setAvatar(strip_tags(stripslashes($row['avatar'])));
         }
         return $user;
     }

@@ -7,13 +7,13 @@
 
 namespace Application;
 
+use Application\Controller\Factory\IndexControllerFactory;
 use Application\Controller\IndexController;
 use Application\Service\Http\Factory\ClientFactory;
 use Application\Service\Http\ClientInterface;
 use Application\Service\Repository\Factory\UserRepositoryFactory;
 use Application\Service\Repository\UserRepository;
 use Zend\Router\Http\Literal;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -32,7 +32,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            IndexController::class => InvokableFactory::class,
+            IndexController::class => IndexControllerFactory::class,
         ],
     ],
     'service_manager' => [
