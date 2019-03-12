@@ -7,6 +7,8 @@
 
 namespace Application;
 
+use Application\Service\Http\Factory\ClientFactory;
+use Application\Service\Http\ClientInterface;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -41,6 +43,11 @@ return [
             Controller\IndexController::class => InvokableFactory::class,
         ],
     ],
+    'service_manager' => [
+        'factories' => [
+            ClientInterface::class => ClientFactory::class,
+        ]
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -57,4 +64,9 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'api_config' => [
+        'host' => 'http://hiring.rewardgateway.net',
+        'user' => 'hard',
+        'password' => 'hard'
+    ]
 ];
