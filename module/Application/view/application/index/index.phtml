@@ -23,14 +23,14 @@
                     <?php endif; ?>
                     <div class="media-body">
                         <h5>
-                            <a class="user-name" href="#<?= $user->getUuid(); ?>"><?= $user->getName(); ?></a>
+                            <a class="user-name" href="#<?= $user->getUuid(); ?>" title="Click for details"><?= $user->getName(); ?></a>
                         </h5>
                         <span class="user-title"><?= $user->getTitle(); ?></span> at <span class="user-company"><?= $user->getCompany(); ?></span>
-                        <?php if ($user->getBio()): ?>
                             <div class="text-muted user-bio" data-full="<?= $user->getBio(); ?>">
+                            <?php if ($user->getBio()): ?>
                                 <?= mb_substr($user->getBio(), 0, 64); ?>...
+                            <?php endif; ?>
                             </div>
-                        <?php endif; ?>
                     </div>
                 </li>
                 <?php endforeach; ?>
@@ -63,6 +63,53 @@
                     });
                 </script>
             <?php endif; ?>
+            <div class="modal" tabindex="-1" role="dialog" id="detailsModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">User Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="#" alt="detailed avatar" style="width:64px" id="detailsAvatar" />
+                                </div>
+                                <div class="col-10">
+                                    <h5 id="detailsName"></h5>
+                                    <h6 id="detailsPosition" class="text-muted"></h6>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col" id="detailsBio"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                let detailsModal = $('#detailsModal');
+                $('.user-name').click(function(e) {
+                    e.preventDefault();
+                    let userContainer = $(this).parents('.user-container')[0];
+                    let avatar = userContainer.querySelector('.user-avatar').src;
+                    let name = userContainer.querySelector('.user-name').innerHTML;
+                    let title = userContainer.querySelector('.user-title').innerHTML;
+                    let company = userContainer.querySelector('.user-company').innerHTML;
+                    let bio = userContainer.querySelector('.user-bio').dataset.full;
+                    detailsModal.find('#detailsAvatar')[0].src = avatar;
+                    detailsModal.find('#detailsName')[0].innerHTML = name;
+                    detailsModal.find('#detailsPosition')[0].innerHTML = title + ' at ' + company;
+                    detailsModal.find('#detailsBio')[0].innerHTML = bio;
+                    detailsModal.modal('show');
+                });
+            </script>
         <?php endif; ?>
     </div>
 </div>
