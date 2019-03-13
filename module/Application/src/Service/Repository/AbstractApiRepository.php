@@ -39,7 +39,7 @@ abstract class AbstractApiRepository implements RepositoryInterface
         } catch (\Exception $e) {
             throw new \RuntimeException(
                 'Error ocurred while trying to load entities',
-                $e-getcwd(),
+                $e->getCode(),
                 $e
             );
         }
