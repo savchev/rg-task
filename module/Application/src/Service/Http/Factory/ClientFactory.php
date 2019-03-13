@@ -8,7 +8,6 @@
 
 namespace Application\Service\Http\Factory;
 
-
 use Application\Service\Http\GuzzleWrapper;
 use GuzzleHttp\Client;
 use Interop\Container\ContainerInterface;
@@ -39,6 +38,4 @@ class ClientFactory implements FactoryInterface
         ]);
         return new GuzzleWrapper($guzzle, $cfg['host']);
     }
-
-
 }

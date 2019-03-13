@@ -8,7 +8,6 @@
 
 namespace Application\Service\Repository;
 
-
 use Application\Entity\User;
 
 class UserRepository extends AbstractApiRepository
@@ -36,6 +35,4 @@ class UserRepository extends AbstractApiRepository
         }
         return $user;
     }
-
-
 }

@@ -8,7 +8,6 @@
 
 namespace Application\Service\Repository\Factory;
 
-
 use Application\Service\Http\ClientInterface;
 use Application\Service\Repository\UserRepository;
 use Interop\Container\ContainerInterface;
@@ -32,6 +31,4 @@ class UserRepositoryFactory implements FactoryInterface
         $httpClient = $container->get(ClientInterface::class);
         return new UserRepository($httpClient);
     }
-
-
 }

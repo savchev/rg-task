@@ -8,7 +8,6 @@
 
 namespace Application\Service\Http;
 
-
 interface ClientInterface
 {
 

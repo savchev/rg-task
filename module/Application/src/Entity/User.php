@@ -8,7 +8,6 @@
 
 namespace Application\Entity;
 
-
 /**
  * Class User
  * @package Application\Entity
