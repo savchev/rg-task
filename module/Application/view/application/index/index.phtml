@@ -1,43 +1,68 @@
 <div class="row justify-content-md-center">
-
-    <div class="col col-6">
-
+    <div class="col col-7">
         <?php if ($error && $error instanceof \Exception): ?>
-
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading"><?= $error->getMessage(); ?></h4>
-            <?php if ($error->getPrevious()): ?>
-            <p>There is more information in previous exceptions:</p>
-            <ul>
-            <?php while (($error = $error->getPrevious())): ?>
-                <li><?= $error->getMessage(); ?></li>
-            <?php endwhile; ?>
-            </ul>
-            <?php endif; ?>
-        </div>
-
-        <?php else: ?>
-
-        <ul class="list-unstyled">
-
-            <?php foreach ($users as $user): ?>
-            <li class="media my-4">
-                <?php if ($user->getAvatar()): ?>
-                    <img style="width:64px" src="<?= $user->getAvatar(); ?>" class="mr-3" alt="avatar" />
-                <?php else: ?>
-                <img style="width:64px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnH4Yu8_WWhN8RVxzE-JAmGE2cy6MlB7fqOZBwiJj8DAAndpR4" class="mr-3" alt="avatar" />
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading"><?= $error->getMessage(); ?></h4>
+                <?php if ($error->getPrevious()): ?>
+                <p>There is more information in previous exceptions:</p>
+                <ul>
+                <?php while (($error = $error->getPrevious())): ?>
+                    <li><?= $error->getMessage(); ?></li>
+                <?php endwhile; ?>
+                </ul>
                 <?php endif; ?>
-                <div class="media-body">
-                    <h5><a href="#<?= $user->getUuid(); ?>"><?= $user->getName(); ?></a></h5>
-                    <?= $user->getTitle(); ?> at <?= $user->getCompany(); ?>
-                    <div class="text-muted"><?= $user->getBio(); ?></div>
+            </div>
+        <?php else: ?>
+            <ul class="list-unstyled">
+                <?php foreach ($users as $key => $user): ?>
+                <li class="media my-4 user-container <?= ($key > 99) ? 'd-none' : '' ?>">
+                    <?php if ($user->getAvatar()): ?>
+                        <img style="width:64px" src="<?= $user->getAvatar(); ?>" class="mr-3 user-avatar" alt="avatar" />
+                    <?php else: ?>
+                        <img style="width:64px" src="/img/noavatar.png" class="mr-3 user-avatar" alt="avatar" />
+                    <?php endif; ?>
+                    <div class="media-body">
+                        <h5>
+                            <a class="user-name" href="#<?= $user->getUuid(); ?>"><?= $user->getName(); ?></a>
+                        </h5>
+                        <span class="user-title"><?= $user->getTitle(); ?></span> at <span class="user-company"><?= $user->getCompany(); ?></span>
+                        <?php if ($user->getBio()): ?>
+                            <div class="text-muted user-bio" data-full="<?= $user->getBio(); ?>">
+                                <?= mb_substr($user->getBio(), 0, 64); ?>...
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php if (count($users) > 10): ?>
+                <div class="row justify-content-md-center">
+                    <div class="col col-4">
+                        <button type="button" class="btn btn-primary" id="showMoreBtn">Show more</button>
+                    </div>
                 </div>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-
+                <script>
+                    let userContainers = $('.user-container');
+                    let currentShown = 100;
+                    const showAmount = 100;
+                    $('#showMoreBtn').click(function() {
+                        let last = currentShown + showAmount;
+                        if (last > userContainers.length) {
+                            last = userContainers.length;                            
+                        }
+                        for (let i = currentShown; i < last; i++) {
+                            userContainers[i].classList.remove('d-none');
+                        }
+                        currentShown = last;
+                        if (last == userContainers.length) {
+                            this.disabled = "disabled";
+                            this.classList.remove('btn-primary');
+                            this.classList.add('btn-secondary');
+                            this.innerHTML = 'No more results';
+                        }
+                    });
+                </script>
+            <?php endif; ?>
         <?php endif; ?>
-
     </div>
-
 </div>
