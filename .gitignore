@@ -2,6 +2,7 @@
 vendor/
 config/development.config.php
 data/cache/*
+data/coverage/*
 !data/cache/.gitkeep
-phpunit.xml
+!data/coverage/.gitkeep
 .idea

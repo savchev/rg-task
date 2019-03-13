@@ -38,12 +38,6 @@ class GuzzleWrapper implements ClientInterface
     public function getAll(): iterable
     {
         $response = $this->guzzle->get($this->url . '/list');
-        if ($response->getStatusCode() != 200) {
-            throw new \RuntimeException(
-                'Error ocurred while fetching response',
-                $response->getStatusCode()
-            );
-        }
         return $this->processResponse($response);
     }
 
@@ -51,7 +45,12 @@ class GuzzleWrapper implements ClientInterface
     {
         $contentType = $response->getHeader('Content-Type');
         if ($contentType && $this->isJson($contentType[0])) {
-            return json_decode($response->getBody().'', true);
+            $result = json_decode($response->getBody().'', true);
+            if (json_last_error() == JSON_ERROR_NONE && is_array($result)) {
+                return $result;
+            } else {
+                return [];
+            }
         } else {
             return [];
         }
@@ -59,6 +58,6 @@ class GuzzleWrapper implements ClientInterface
 
     protected function isJson(string $contentType): bool
     {
-        return (bool) preg_match('/^application\/[\w\s\.\+]*(json)/i', $contentType);
+        return (bool) preg_match('/^application\/[\w\s\.\+\-]*(json)/i', $contentType);
     }
 }

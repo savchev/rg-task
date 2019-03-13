@@ -29,19 +29,11 @@ abstract class AbstractApiRepository implements RepositoryInterface
 
     public function getAll(): iterable
     {
-        try {
-            $response = $this->httpClient->getAll();
-            $result = [];
-            foreach ($response as $row) {
-                $result[] = $this->hydrate($row);
-            }
-            return $result;
-        } catch (\Exception $e) {
-            throw new \RuntimeException(
-                'Error ocurred while trying to load entities',
-                $e->getCode(),
-                $e
-            );
+        $response = $this->httpClient->getAll();
+        $result = [];
+        foreach ($response as $row) {
+            $result[] = $this->hydrate($row);
         }
+        return $result;
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="ZendSkeletonApplication Test Suite">
+            <directory>./module/Application/test/Service</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+      <whitelist>
+         <file>./module/Application/src/Service/Http/GuzzleWrapper.php</file>
+         <file>./module/Application/src/Service/Repository/AbstractApiRepository.php</file>
+         <file>./module/Application/src/Service/Repository/UserRepository.php</file>
+      </whitelist>
+   </filter>
+    <logging>
+      <log type="coverage-html" target="./data/coverage" />
+      <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+      <log type="testdox-text" target="php://stdout"/>
+   </logging>
+</phpunit>
