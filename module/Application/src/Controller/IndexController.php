@@ -1,31 +1,39 @@
 <?php
-/**
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application\Controller;
 
 use Application\Service\Repository\RepositoryInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 
+/**
+ * Class IndexController
+ *
+ * @package Application\Controller
+ */
 class IndexController extends AbstractActionController
 {
     /**
+     * The users repository
+     *
      * @var RepositoryInterface
      */
     protected $repository;
 
     /**
      * IndexController constructor.
-     * @param RepositoryInterface $repository
+     *
+     * @param RepositoryInterface $repository The users repository
      */
     public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * Action method for index page
+     *
+     * @return array The view model with users and error (both params can be empty)
+     */
     public function indexAction()
     {
         try {

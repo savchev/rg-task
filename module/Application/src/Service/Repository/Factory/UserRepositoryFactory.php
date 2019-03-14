@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kiril_savchev
- * Date: 12.3.2019 г.
- * Time: 23:24
- */
 
 namespace Application\Service\Repository\Factory;
 
@@ -16,18 +10,28 @@ use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
+/**
+ * Class UserRepositoryFactory
+ *
+ * @package Application\Service\Repository\Factory
+ */
 class UserRepositoryFactory implements FactoryInterface
 {
 
     /**
-     * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param array|null $options
+     * Creates the user repository service
      *
-     * @return UserRepository
+     * @param ContainerInterface $container The service container
+     * @param string $requestedName The requested service name
+     * @param array|null $options Additional options
+     *
+     * @return UserRepository The user repository service
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) {
         $httpClient = $container->get(ClientInterface::class);
         return new UserRepository($httpClient);
     }

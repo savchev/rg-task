@@ -1,15 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kiril_savchev
- * Date: 12.3.2019 г.
- * Time: 22:38
- */
 
 namespace Application\Service\Http;
 
+/**
+ * Interface ClientInterface
+ *
+ * Common interface for http clients
+ *
+ * @package Application\Service\Http
+ */
 interface ClientInterface
 {
 
+    /**
+     * Fetches API's all data
+     *
+     * @return iterable Collection from the API's data
+     */
     public function getAll(): iterable;
 }

@@ -23,15 +23,15 @@ class UserRepositoryTest extends TestCase
         $client = $this->getMockForAbstractClass(ClientInterface::class);
         $client->expects($this->any())
             ->method('getAll')
-            ->will($this->returnCallback(function() use ($guzzle, $url) {
+            ->will($this->returnCallback(function () use ($guzzle, $url) {
                 $response = $guzzle->get($url.'/list');
                 if ($response) {
-                    return (array) json_decode($response->getBody().'', true);                    
+                    return (array) json_decode($response->getBody().'', true);
                 } else {
                     return [];
                 }
             }));
-        
+
         $this->repository = new UserRepository($client);
     }
 

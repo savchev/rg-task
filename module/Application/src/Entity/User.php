@@ -1,52 +1,63 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kiril_savchev
- * Date: 12.3.2019 г.
- * Time: 22:18
- */
 
 namespace Application\Entity;
 
 /**
  * Class User
+ *
+ * The user object
+ *
  * @package Application\Entity
  */
 class User
 {
 
     /**
+     * The user unique identity
+     *
      * @var string
      */
     protected $uuid;
 
     /**
+     * The user's company
+     *
      * @var string
      */
     protected $company;
 
     /**
+     * The user's biography
+     *
      * @var string
      */
     protected $bio;
 
     /**
+     * The user' names
+     *
      * @var string
      */
     protected $name;
 
     /**
+     * The user's job title
+     *
      * @var string
      */
     protected $title;
 
     /**
+     * The user's avatar
+     *
      * @var string
      */
     protected $avatar;
 
     /**
-     * @return string
+     * Return the UUID
+     *
+     * @return string|null The user's unique identity
      */
     public function getUuid(): ?string
     {
@@ -54,8 +65,11 @@ class User
     }
 
     /**
-     * @param string $uuid
-     * @return User
+     * Set the user's UUID
+     *
+     * @param string $uuid The UUID
+     *
+     * @return User Self-reference
      */
     public function setUuid(string $uuid): User
     {
@@ -64,7 +78,9 @@ class User
     }
 
     /**
-     * @return string
+     * Return the user's company
+     *
+     * @return string|null The user's company
      */
     public function getCompany(): ?string
     {
@@ -72,8 +88,11 @@ class User
     }
 
     /**
-     * @param string $company
-     * @return User
+     * Sets the user's company
+     *
+     * @param string $company The company name
+     *
+     * @return User Self-reference
      */
     public function setCompany(string $company): User
     {
@@ -82,7 +101,9 @@ class User
     }
 
     /**
-     * @return string
+     * Sets the user's biography
+     *
+     * @return string|null The user's biography
      */
     public function getBio(): ?string
     {
@@ -90,8 +111,11 @@ class User
     }
 
     /**
-     * @param string $bio
-     * @return User
+     * Sets the user's biography
+     *
+     * @param string $bio The user's biography
+     *
+     * @return User Self-reference
      */
     public function setBio(string $bio): User
     {
@@ -100,7 +124,9 @@ class User
     }
 
     /**
-     * @return string
+     * Returns the user's full name
+     *
+     * @return string|null The user full name
      */
     public function getName(): ?string
     {
@@ -108,8 +134,11 @@ class User
     }
 
     /**
-     * @param string $name
-     * @return User
+     * Sets the user full name
+     *
+     * @param string $name The user full name
+     *
+     * @return User Self-reference
      */
     public function setName(string $name): User
     {
@@ -118,7 +147,9 @@ class User
     }
 
     /**
-     * @return string
+     * Returns the user's job title
+     *
+     * @return string|null The job title
      */
     public function getTitle(): ?string
     {
@@ -126,8 +157,11 @@ class User
     }
 
     /**
-     * @param string $title
-     * @return User
+     * Sets the job title
+     *
+     * @param string $title The job title
+     *
+     * @return User Self-reference
      */
     public function setTitle(string $title): User
     {
@@ -136,7 +170,9 @@ class User
     }
 
     /**
-     * @return string
+     * Returns the user's avatar
+     *
+     * @return string|null The user's avatar URL
      */
     public function getAvatar(): ?string
     {
@@ -144,8 +180,11 @@ class User
     }
 
     /**
-     * @param string $avatar
-     * @return User
+     * Sets the user's avatar
+     *
+     * @param string $avatar The avatar URL
+     *
+     * @return User Self-reference
      */
     public function setAvatar(string $avatar): User
     {

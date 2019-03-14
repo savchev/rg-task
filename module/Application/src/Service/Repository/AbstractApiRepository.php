@@ -1,32 +1,42 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kiril_savchev
- * Date: 12.3.2019 г.
- * Time: 23:12
- */
 
 namespace Application\Service\Repository;
 
 use Application\Service\Http\ClientInterface as HttpClientInterface;
 
+/**
+ * Class AbstractApiRepository
+ *
+ * Abstract class for fetching data from REST APIs.
+ * The ancestors must implement the hydrate method.
+ *
+ * @package Application\Service\Repository
+ */
 abstract class AbstractApiRepository implements RepositoryInterface
 {
 
     /**
+     * HTTP client for communicating with the API
+     *
      * @var HttpClientInterface
      */
     protected $httpClient;
 
     /**
      * AbstractApiRepository constructor.
-     * @param HttpClientInterface $httpClient
+     *
+     * @param HttpClientInterface $httpClient HTTP client for the API
      */
     public function __construct(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }
 
+    /**
+     * Fetches all data from the API and hydrate it as concrete objects
+     *
+     * @return iterable Collection with objects
+     */
     public function getAll(): iterable
     {
         $response = $this->httpClient->getAll();

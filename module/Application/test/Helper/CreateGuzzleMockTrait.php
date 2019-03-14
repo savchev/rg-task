@@ -9,7 +9,8 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
 
-trait CreateGuzzleMockTrait {
+trait CreateGuzzleMockTrait
+{
 
     public function getGuzzleMock()
     {

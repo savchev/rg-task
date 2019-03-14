@@ -1,17 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kiril_savchev
- * Date: 12.3.2019 г.
- * Time: 23:16
- */
 
 namespace Application\Service\Repository;
 
 use Application\Entity\User;
 
+/**
+ * Class UserRepository
+ *
+ * Repository object for fetching users
+ *
+ * @package Application\Service\Repository
+ */
 class UserRepository extends AbstractApiRepository
 {
+    /**
+     * Create new user object and populate it with data
+     *
+     * @param mixed $row Data for the object
+     *
+     * @return User Object, filled with the data
+     */
     public function hydrate($row)
     {
         $user = new User();
