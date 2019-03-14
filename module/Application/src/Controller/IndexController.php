@@ -7,21 +7,21 @@
 
 namespace Application\Controller;
 
-use Application\Service\Repository\UserRepository;
+use Application\Service\Repository\RepositoryInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
     /**
-     * @var UserRepository
+     * @var RepositoryInterface
      */
     protected $repository;
 
     /**
      * IndexController constructor.
-     * @param UserRepository $repository
+     * @param RepositoryInterface $repository
      */
-    public function __construct(UserRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

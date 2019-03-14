@@ -15,7 +15,7 @@
         <?php else: ?>
             <ul class="list-unstyled">
                 <?php foreach ($users as $key => $user): ?>
-                <li class="media my-4 user-container <?= ($key > 99) ? 'd-none' : '' ?>">
+                <li class="media my-4 user-container <?= ($key > 9) ? 'd-none' : '' ?>">
                     <?php if ($user->getAvatar()): ?>
                         <img style="width:64px" src="<?= $user->getAvatar(); ?>" class="mr-3 user-avatar" alt="avatar" />
                     <?php else: ?>
@@ -43,8 +43,8 @@
                 </div>
                 <script>
                     let userContainers = $('.user-container');
-                    let currentShown = 100;
-                    const showAmount = 100;
+                    let currentShown = 10;
+                    const showAmount = 10;
                     $('#showMoreBtn').click(function() {
                         let last = currentShown + showAmount;
                         if (last > userContainers.length) {
